@@ -14,14 +14,14 @@ public class ServerSocketOne {
 		// TODO Auto-generated method stub
 		try {
 			serverSocket = new ServerSocket(8888);
-			System.out.print("listening 8888 port!");
+			System.out.println("listening 8888 port!");
 			while (true) {
 				clientSocket = serverSocket.accept();
 				try {
 					dataInputStream = new DataInputStream(
 							clientSocket.getInputStream());
 					String msg = dataInputStream.readUTF();
-					System.out.print(msg);
+					System.out.println("msg:"+msg);
 
 					// 判断输入，进行相应的操作
 					if (msg.equalsIgnoreCase("shutdown")) {
@@ -50,15 +50,16 @@ public class ServerSocketOne {
 	}
 	
 	public static void Shutdown() throws IOException{
-		Process p = Runtime.getRuntime().exec("sutdown -s -t 60");
+		Process p = Runtime.getRuntime().exec("shutdown -s");
 		System.out.println("shutdown ,60 seconds later !");
 	}
 	public static void Restart() throws IOException{
-		Process p = Runtime.getRuntime().exec("sutdown -r -t 60");
+		Process p = Runtime.getRuntime().exec("shutdown -r");
 		System.out.println("restart ,60 seconds later !");
 	}
 	public static void Logoff() throws IOException{
-		Process p = Runtime.getRuntime().exec("sutdown -l -t 60");
+		Process p = Runtime.getRuntime().exec("shutdown -l");
+	//	Process p = Runtime.getRuntime().exec("sutdown -l -t 60");
 		System.out.println("Logoff ,60 seconds later !");
 	}
 }
